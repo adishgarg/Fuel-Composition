@@ -8,13 +8,13 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 import pickle
 
-df = pd.read_csv("synthetic_fuel_data_ctgan.csv")
+df = pd.read_csv("synthetic_mustard_data_gc.csv")
 
 le = LabelEncoder()
-df['label_encoded'] = le.fit_transform(df['label'])
+df['label_encoded'] = le.fit_transform(df['Adulterant'])
 with open('label_encoder.pkl', 'wb') as f:
     pickle.dump(le, f)
-X = df[['frequency_shift', 'S11_magnitude', 'Q_factor', 'phase_shift']]
+X = df[['frequency_shift', 'S11', 'q_factor', 'sensitivity', 'Adulteration']]
 y = df['label_encoded']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -52,4 +52,3 @@ y_pred = log_model.predict(X_test)
 print("LOG Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred, target_names=le.classes_))
 
-import matplotlib.pyplot as plt

@@ -17,7 +17,7 @@ with open('logistic_regression_model.pkl', 'rb') as f:
 with open("label_encoder.pkl", "rb") as f:
     le = pickle.load(f)
 
-df = pd.read_csv("synthetic_fuel_data_ctgan.csv")  
+df = pd.read_csv("synthetic_fuel_data_gc.csv")  
 df['label_encoded'] = le.transform(df['label'])
 X = df[['frequency_shift', 'S11_magnitude', 'Q_factor', 'phase_shift']]
 y_true = df['label_encoded']

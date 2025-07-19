@@ -17,8 +17,7 @@ with open('label_encoder.pkl', 'rb') as f:
 
 # Test sample: [frequency_shift, S11_magnitude, Q_factor, phase_shift]
 test_sample = np.array([
-    [0.24, -16.5, 22.0, 44.0],   
-    [0.21, -13.8, 18.5, 40.2]    
+    [25, 1.65, 0.74, -3.36, 9.43],   
 ])
 
 lgbm_pred = le.inverse_transform(lgbm_model.predict(test_sample).astype(int))
@@ -27,6 +26,6 @@ log_pred  = le.inverse_transform(log_model.predict(test_sample).astype(int))
 
 for idx, sample in enumerate(test_sample):
     print(f"\nSample {idx+1} : {sample}")
-    print(f"  🔸 LightGBM Prediction: {lgbm_pred[idx]}")
+    # print(f"  🔸 LightGBM Prediction: {lgbm_pred[idx]}")
     print(f"  🔸 XGBoost Prediction : {xgb_pred[idx]}")
-    print(f"  🔸 Logistic Regression: {log_pred[idx]}")
+    # print(f"  🔸 Logistic Regression: {log_pred[idx]}")

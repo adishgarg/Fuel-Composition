@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sdv.metadata import SingleTableMetadata
 
-df = pd.read_csv('fuel_data.csv')
+df = pd.read_csv('Mustard_oil_Sheet1.csv')
 
 # print(df.head())
 # print(df.describe())
@@ -22,12 +22,12 @@ ctgan_model.fit(df)
 synthetic_gc = gc_model.sample(5000)
 synthetic_ctgan = ctgan_model.sample(5000)
 
-synthetic_gc.to_csv('synthetic_fuel_data_gc.csv', index=False)
-synthetic_ctgan.to_csv('synthetic_fuel_data_ctgan.csv', index=False)
+synthetic_gc.to_csv('synthetic_mustard_data_gc.csv', index=False)
+synthetic_ctgan.to_csv('synthetic_mustard_data_ctgan.csv', index=False)
 
 print("Synthetic datasets saved ✅")
 
-for col in ['frequency_shift', 'S11_magnitude', 'Q_factor', 'phase_shift']:
+for col in ['frequency_shift', 'S11', 'q_factor', 'sensitivity', 'Adulteration']:
     plt.figure(figsize=(10, 5))
     sns.kdeplot(df[col], label='Original', color='blue')
     sns.kdeplot(synthetic_gc[col], label='GaussianCopula', color='green')
